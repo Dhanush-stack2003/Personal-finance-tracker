@@ -1,0 +1,117 @@
+.navbar{
+    display:flex ;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    height: 80px;
+    background-color: #3869ff;
+}
+
+h1 span{
+    color: #3869ff;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    padding: 0px 10px;
+}
+
+.search input{
+    padding:15px 20px;
+    font-size: 20px;
+    width: 350px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.icon{
+    border-left: 1px solid lightgray;
+    font-size: 30px;
+    padding:0px 10px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.menubar ul{
+    list-style: none;
+    display: flex;
+}
+
+.menubar ul li{
+    padding: 10px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    color: #ffff;
+}
+
+.menubar ul li:hover{
+    background-color: #ffff;
+    color: #3869ff;
+    border-radius: 5px;
+}
+
+.menubar_1 ul li:hover{
+    background:#ffff;
+    border-radius: 5px;
+    color: #3869ff;
+}
+.menubar_1 ul li span:hover{
+    background:#ffff;
+}
+
+
+.menubar_1{
+    display: none;
+    position: absolute;
+    left: 6%;
+    top: 100%;
+    background-color: #3869ff;
+}
+
+.menubar ul li:hover .menubar_1,
+.menubar_1:hover{
+    display: block;
+}
+    
+.menubar ul li:hover .menubar_1 ul{
+    display: block;
+    margin: 10px;
+}
+
+.menubar ul li:hover .menubar_1 ul li{
+ width: 150px;
+ padding: 10px;
+ position: relative;
+}
+
+.dropdown_menu_1{
+    display: none;
+}
+
+.dropdown_menu_1 ul li span:hover{
+    background-color: #ffff;
+    color: #3869ff;
+}
+.dropdown_menu_1 ul li:hover{
+    background-color: #ffff;
+    color: #3869ff;
+}
+
+.menubar_1 ul li:hover .dropdown_menu_1{
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: -20%;
+    background-color: #3869ff;
+}
+
+
+
+
