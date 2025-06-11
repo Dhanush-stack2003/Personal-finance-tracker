@@ -18,23 +18,23 @@ function UserGreet() {
   
   useEffect(()=>{
     
-    const expensePieData = [];
     const totalAmount = async() => {
       const { data } = await Api.get(`/transaction/totalAmount/${currentUser._id}`)
       if(!data){
         toast.error(data.message)
         return
       }
-        const { totalExpense,totalIncome } = data.message
-        setAmounts({expense:totalExpense,income:totalIncome})
-      }
+      const { totalExpense,totalIncome } = data.message
+      setAmounts({expense:totalExpense,income:totalIncome})
+    }
       
-          const getFilterData = async() => {
-            const {data} = await Api.get(`/transaction/filterbydate/${date}/${currentUser._id}`)
-            if(!data){
-              toast.error(data.message)
-            }
-            let transaction = data.message;
+    const getFilterData = async() => {
+      const {data} = await Api.get(`/transaction/filterbydate/${date}/${currentUser._id}`)
+      if(!data){
+        toast.error(data.message)
+      }
+      let transaction = data.message;
+      const expensePieData = [];
 
             transaction.forEach((item) => {
               const existing = expensePieData.find(
