@@ -1,6 +1,8 @@
+import axios from 'axios';
 import User  from '../model/model.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+
 
 export const SignUp = async (req,res) => {
     const {username,email,password} = req.body;
@@ -20,7 +22,6 @@ export const SignUp = async (req,res) => {
 
         await userSignUp.save();
 
-        console.log(userSignUp)
         res.status(201).json({success:true,message:"Account created successfull"})
     } catch (error) {
         res.status(400).json(error.message)
@@ -29,13 +30,13 @@ export const SignUp = async (req,res) => {
 
 export const SignIn = async(req,res) => {
     const {email,password} = req.body;
-
-     if (!email || !password) {
+     if (email === '' || password === '') {
        return res.json({
          success: false,
          message: "please provide all the details",
        });
      }
+
      try{
      const isExistingUser = await User.findOne({email});
 
@@ -49,73 +50,142 @@ export const SignIn = async(req,res) => {
         return res.status(401).json({success:false,message:"invalid password"})
      }
 
-     const token = jwt.sign({id:isExistingUser._id},process.env.JWT_TOKEN,{expiresIn:'7d'});
-     
-     const {password:pass,...rest} = isExistingUser._doc;
+     const userId = isExistingUser._id
 
-     res.cookie('Token',token,{
+     const AccessToken = jwt.sign({id:userId},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'});
+
+     const RefreshToken = jwt.sign({id:userId},process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'})
+
+     res.cookie('AccessToken',AccessToken,{
         httpOnly:true,
         secure:process.env.NODE_TOKEN === 'production',
         sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
      })
 
+     res.cookie('RefreshToken',RefreshToken,{
+        httpOnly:true,
+        sameSite:process.env.NODE_TOKEN === 'production' ? 'none' :'strict',
+        secure:process.env.NODE_TOKEN === 'production',
+        maxAge:7* 24 * 60 * 60 * 1000
+     })
 
-     console.log(rest)
+     const {password:pass,...rest} = isExistingUser._doc
 
-     return res.status(200).json({success:true,message:'Logged In'})
+     return res.status(200).json({success:true,message:rest})
      }catch(error){
         return res.status(400).json(error.message)
      }
 }
 
+export const googleAuth = async (req,res) => {
+    const {email,photoURL,username} = req.body
+    
+    try {
+        const isUserExist = await User.findOne({email:email})
+        if(isUserExist){
+            const userId = isUserExist._id
+            const AccessToken = jwt.sign({id:userId},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
+            const RefreshToken = jwt.sign({id:userId},process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'})
+            res.cookie('AccessToken',AccessToken,{
+                httpOnly:true,
+                sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
+                secure:process.env.NODE_TOKEN === 'production'
+            })
+            res.cookie('RefreshToken',RefreshToken,{
+                httpOnly:true,
+                sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
+                secure:process.env.NODE_TOKEN === 'production',
+                maxAge: 7 * 24 * 60 * 60 * 1000
+            })
+
+            const { password:pass,...rest} = isUserExist._doc
+
+            return res.status(200).json({success:true,message:rest})
+        }
+        else{
+            const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+
+            const hashedPassword = bcrypt.hashSync(randomPassword,10)
+
+            const user = await User.create({
+                email:email,
+                photoURL:photoURL,
+                password:hashedPassword,
+                username:username,
+                isAccountVerified:true
+            })
+
+            await user.save()
+
+            const userId = user._id
+
+             const AccessToken = jwt.sign({ id: userId },process.env.ACCESS_TOKEN_KEY,{ expiresIn: "15m" });
+             const RefreshToken = jwt.sign({ id: userId },process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'});
+             res.cookie("AccessToken", AccessToken, {
+               httpOnly: true,
+               sameSite:process.env.NODE_TOKEN === "production" ? "none" : "strict",
+               secure: process.env.NODE_TOKEN === "production",
+             });
+             res.cookie("RefreshToken", RefreshToken, {
+               httpOnly: true,
+               sameSite:process.env.NODE_TOKEN === "production" ? "none" : "strict",
+               secure: process.env.NODE_TOKEN === "production",
+               maxAge: 7 * 24 * 60 * 60 * 1000
+             });
+
+             const {pass:password,...rest} = user._doc
+
+            return res.status(201).json({success:true,message:rest})
+        }
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+} 
+
 export const SignOut = (req,res) => {
     try {
-        res.clearCookie("Token", {
-          HttpOnly: true,
-          Secure: process.env.NODE_TOKEN === "production",
-          SameSite: process.env.NODE_TOKEN === "production" ? "none" : "strict",
+        res.clearCookie("AccessToken", {
+          httpOnly: true,
+          secure: process.env.NODE_TOKEN === "production",
+          sameSite: process.env.NODE_TOKEN === "production" ? "none" : "strict",
         });
+        res.clearCookie('RefreshToken',{
+            httpOnly:true,
+            secure:process.env.NODE_TOKEN === 'production',
+            sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict'
+        })
     
         return res.status(200).json({success:true,message:'Logged out'})
-        
     } catch (error) {
         return res.status(500).json({success:false,message:error.message})
     }
 }
 
-export const EmailVerification = async (req,res) => {
-    const {userId} = req.body;
-    console.log(userId)
+export const RefreshToken = async (req,res) => {
+    const RefreshToken  = req.cookies.RefreshToken;
+
+    if(RefreshToken == null) return res.status(403).json({success:false,message:"no token provided"});
+
     try {
-       const user = await User.findById(userId)
-       
-       if(!user){
-        return res.status(401).json({success:false,message:"user not found"})
-       }
+        const decoded = jwt.verify(RefreshToken,process.env.REFRESH_TOKEN_KEY);
 
-       if(user.isAccountVerified){
-        return res.json({success:false,message:"user already verified"})
-       }
+       const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
 
-       const otp = String(Math.floor(100000 + Math.random() * 900000))
+       res.cookie('AccessToken',newToken,{
+            httpOnly:true,
+            sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
+            secure:process.env.NODE_TOKEN === 'production',
+        })
 
-       const otpValidTime = Date.now() + 24 * 60 * 60 * 1000 
-  
-
-        user.verifyOtp = otp;
-        user.verifyOtpExpire = otpValidTime
-
-        await user.save()
-
-        return res.status(200).json({success:true,message:user})
-
+        return res.status(200).json({RefreshedAccessToken:newToken})
     } catch (error) {
-        res.status(500).json({success:false,message:error.message})
+        console.log(error.message)
+        return res.status(500).json({success:false,message:"Invalid Token"})
+
     }
 }
 
-export const OtpVerification =async (req,res) => {
+export const OtpVerification = async (req,res) => {
     const {userId,otp} = req.body
 
     if(!userId || !otp){
@@ -135,22 +205,12 @@ export const OtpVerification =async (req,res) => {
         if(user.verifyOtp != otp || otp === ''){
             return res.join({success:false,message:"invalid otp"})
         }
-
-            user.isAccountVerified = true
             user.verifyOtp = ''
             user.verifyOtpExpire = 0  
             await user.save();
             return res.status(200).json({success:true,message:"OTP Verified successfully"})
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
-    }
-}
-
-export const isAuthenticated = (req,res) => {
-    try {
-        return res.status(200).json({success:true,message:"user Authenticated"})
-    } catch (error) {
-        return res.json({success:false,message:error.message})
     }
 }
 
@@ -185,10 +245,10 @@ export const resetOtp = async (req,res) => {
 
 }
 
-export const verifyResetOtp = async(req,res) => {
+export const verifyResetOtp = async (req,res) => {
     const { email,otp,newPassword } = req.body
 
-    if(!email || !otp || !password){
+    if(!email || !otp || !newPassword){
        return res.status(401).json({ success: false, message: "provide valid email,otp and password" });
     }
 
@@ -221,5 +281,106 @@ export const verifyResetOtp = async(req,res) => {
 
     } catch (error) {
        return res.status(400).json({ success: false, message: error.message });
+    }
+}
+
+export const EmailVerification = async (req, res) => {
+
+  const { email } = req.body;
+
+  const apikey = process.env.SENDIN_BLUE_APIKEY;
+  const endPoint = "https://api.brevo.com/v3/smtp/email";
+
+  try {
+    const user = await User.findOne({email:email});
+    if (!user) {
+        return res.status(401).json({ success: false, message: "user not found" });
+    }
+    
+    if (user.isAccountVerified) {
+        return res.json({ success: false, message: "user already verified" });
+    }
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const otpValidTime = Date.now() + 24 * 60 * 60 * 1000;
+    
+    user.verifyOtp = otp;
+    user.verifyOtpExpire = otpValidTime;
+    
+    
+    await user.save();
+    const emailData = {
+        sender: {
+            name: "finance tracker",
+            email: "jesseprvtp03@gmail.com",
+        },
+        to: [
+            {
+                email: email,
+            },
+        ],
+        subject: "otp verification",
+        htmlContent: `<html> <body> <p> your otp verification code is ${otp},code will be expire in 15 minutes don't share with anyone </p> </body> </html>`,
+    };
+    try {
+        const { data } = await axios.post(endPoint, emailData, {
+            headers: {
+                "Content-Type": "application/json",
+                "api-key": apikey,
+            },
+        });
+        return res.status(200).json({ success: true, message: "Email sent successfully" });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const verifyOtp = async (req,res) => {
+
+    const { otp,email } = req.body
+    const user = await User.findOne({email:email});
+    try{
+    if(!user){
+        return res.status(400).json({success:false,message:"Authentication failed"})
+    }
+    if(user.verifyOtp === otp){
+        user.verifyOtp = ''
+        user.verifyOtpExpire = 0
+        return res.status(200).json({success:true,message:"otp verified"})
+    }}catch(error){
+        return res.status(500).json({success:false,message:error.message})
+    }
+
+}
+
+export const resetPassword = async (req,res) => {
+
+    const { newPassword,email } = req.body;
+
+    try {
+        const user = await User.findOne({email:email})
+        if(!user){
+            return res.status(401).json({success:false,message:"user not found, please sign up"})
+        }
+
+        const hashedPassword = bcrypt.hashSync(newPassword,10)
+
+         user.password = hashedPassword
+
+         await user.save()
+
+         return res.status(201).json({success:true,message:"Password has been updated"})
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message})
+    }
+}
+
+export const isAccountVerified = async (req,res) => {
+    try {
+        return res.status(200).json({success:true,message:"user is verified"})
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message})
     }
 }

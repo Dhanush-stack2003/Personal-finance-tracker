@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 
 const userAuth = (req,res,next) => {
-    const {Token} = req.cookies;
-    if(!Token){
+    const {AccessToken} = req.cookies;
+
+    if(!AccessToken){
         return res
           .status(403)
           .json({
@@ -11,9 +12,9 @@ const userAuth = (req,res,next) => {
           });
     }
     try {
-        const jwtDecode = jwt.verify(Token,process.env.JWT_TOKEN)
+        const jwtDecode = jwt.verify(AccessToken,process.env.ACCESS_TOKEN_KEY)
         if(jwtDecode.id){
-            req.body.userId = jwtDecode.id
+            req.userId = jwtDecode.id
             next()
         }
     } catch (error) {

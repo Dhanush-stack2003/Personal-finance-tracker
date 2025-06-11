@@ -1,5 +1,5 @@
 import Express from 'express'
-import { SignIn, SignOut, SignUp, EmailVerification, OtpVerification, isAuthenticated, resetOtp, verifyResetOtp } from '../Controller/AuthController.js'
+import { SignIn, SignOut, SignUp, EmailVerification, verifyOtp, resetOtp, verifyResetOtp, RefreshToken, googleAuth, isAccountVerified, resetPassword } from '../Controller/AuthController.js'
 import userAuth from '../Config/userAuth.js'
 
 const AuthRouter = Express.Router()
@@ -8,16 +8,22 @@ AuthRouter.post('/sign-up',SignUp)
 
 AuthRouter.post('/sign-in',SignIn)
 
-AuthRouter.get('/logout',SignOut)
+AuthRouter.get('/log-out',SignOut)
 
-AuthRouter.post('/verify-email',userAuth,EmailVerification)
+AuthRouter.post('/verify-email',EmailVerification)
 
-AuthRouter.post('/verify-otp',userAuth,OtpVerification)
+AuthRouter.post('/verify-otp',verifyOtp)
 
-AuthRouter.get('/is-auth',userAuth,isAuthenticated)
+AuthRouter.post('/reset-password',resetPassword)
 
 AuthRouter.post('/send-reset-otp',resetOtp)
 
 AuthRouter.post('/verify-reset-otp',verifyResetOtp)
+
+AuthRouter.post('/refresh-token',RefreshToken)
+
+AuthRouter.post('/google-auth',googleAuth)
+
+AuthRouter.get('/isVerified',userAuth,isAccountVerified)
 
 export default AuthRouter

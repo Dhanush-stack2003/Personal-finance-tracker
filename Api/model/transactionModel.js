@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 
 const TransactionSchema = new mongoose.Schema({
     userId:{
-        type:mongoose.Types.ObjectId,
-        ref:"User",
+        type:String,
+        ref:"UserId",
     },
     paymentMethod:{
         type:String,
@@ -15,7 +15,7 @@ const TransactionSchema = new mongoose.Schema({
         enum:["Rent","Entertainment","Food","Salary","Others"],
         required:true
     },
-    type:{
+    paymentType:{
         type:String,
         enum:["Income","Expense"],
         required:true
