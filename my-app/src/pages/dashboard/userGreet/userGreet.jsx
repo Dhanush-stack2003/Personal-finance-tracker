@@ -15,17 +15,16 @@ function UserGreet() {
     expense:0,
     income:0
   })
-  const expensePieData = [];
   
   useEffect(()=>{
     
+    const expensePieData = [];
     const totalAmount = async() => {
       const { data } = await Api.get(`/transaction/totalAmount/${currentUser._id}`)
       if(!data){
         toast.error(data.message)
         return
       }
-      setData(data.message)
         const { totalExpense,totalIncome } = data.message
         setAmounts({expense:totalExpense,income:totalIncome})
       }
