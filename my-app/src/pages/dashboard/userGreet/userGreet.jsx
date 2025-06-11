@@ -55,7 +55,7 @@ function UserGreet() {
     totalAmount()
     getFilterData()
 
-  },[date,currentUser._id,expensePieData])      
+  },[date,currentUser._id])      
        
      const COLORS = ["#FF6B6B","#A78BFA", "#6EE7B7", "#60A5FA", "#FBBF24"];
 
