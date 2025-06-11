@@ -1,0 +1,39 @@
+.recent_transaction{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 650px;
+    align-self: flex-start;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #2E1D18;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recent_transaction p{
+    padding:20px 0px;
+    margin-left: 20px;
+    font-size: 25px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.latestTransaction{
+    display: flex;
+}
+
+@media (max-width:600px) {
+
+    .recent_transaction{
+        display: flex;
+        height: 530px;
+        width: 350px;
+    }
+
+    .recent_transaction p{
+        text-align: center;
+    }
+    
+}

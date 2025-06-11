@@ -1,0 +1,23 @@
+.get_transaction_right_side{
+    display: flex;
+    padding: 20px;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    color: slategray;
+    margin-bottom: 20px;    
+}
+
+@media (max-width:600px) {
+
+    .get_transaction_right_side .title {
+        margin: 20px 0px;
+        text-align: center;
+    }
+    .get_transaction_right_side {
+        padding: 0;
+        margin: 0 auto;
+    }
+}

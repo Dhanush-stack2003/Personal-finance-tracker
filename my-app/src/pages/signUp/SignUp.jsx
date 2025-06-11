@@ -1,37 +1,40 @@
 import {useState} from 'react';
 import {useNavigate,Link} from 'react-router-dom'
-import './SignUp.css'
+import {useDispatch} from 'react-redux'
+import { SignUpSuccess,SignUpFailure,SignUpStart } from '../../store/userSlice/userSlice';
+import classes from './SignUp.module.css'
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import Oauth from '../../components/oAuth/Oauth';
+import Api from '../privateProfile/Api';
 
 function SignUp() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const loading = useSelector(state=>state.user.loading)
     const [userData,setUserData] = useState({
         username:"",
         email:"",
         password:""
     })
 
+
     const submitHandler = async(e) => {
         e.preventDefault();
             try {
-               const user = await fetch('http://localhost:3000/api/auth/sign-up',{
-                 method:'POST',
-                 headers:{
-                    "Content-Type":"application/json"
-                 },
-                 body:JSON.stringify(userData)
-                })
-
-                const data = await user.json()
-
+              dispatch(SignUpStart())
+              const {data} = await Api.post('/auth/sign-up',userData)
                 if(data.success === true){
-                    console.log("sign-in completed")
+                    dispatch(SignUpSuccess(data._id))
                     navigate('/sign-in')
                 }
                 else{
-                    console.log(data)
+                  dispatch(SignUpFailure(data.message))
+                  toast.error(data.message)
                 }
             } catch (error) {
-                console.log(error)
+                dispatch(SignUpFailure(error))
+                toast.error(error.message)
             }
         }
 
@@ -39,21 +42,50 @@ function SignUp() {
         setUserData({...userData,[e.target.id]:e.target.value})
     }
   return (
-    <div className="signup">
+    <>
+    {loading ? "<p>loading...<p>" : <div className={classes.signup}>
+      <div className={classes.signup_leftside}>
+        <div className={classes.signup_head}>
+          <h1>Create a New Account</h1>
+          <p>Create an Account so you can manage your personal finances</p>
+        </div>
         <form>
-            <div className="username">
-                <input type='text' placeholder='Enter your Name' onChange={changehandler} id='username' value={userData.username}/>
-            </div>
-            <div className="email">
-                <input type='email' placeholder='Enter your email' onChange={changehandler} id='email' value={userData.email}/>
-            </div>
-            <div className="password">
-                <input type='password' placeholder='Enter your password' onChange={changehandler} id='password' value={userData.password}/>
-            </div>
-            <p>Already have an account <Link to='/sign-in'>Sign In</Link></p>
-            <button onClick={submitHandler}>Sign Up</button>
+          <div className={classes.username}>
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={changehandler}
+              id="username"
+              value={userData.username}
+            />
+          </div>
+          <div className={classes.email}>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={changehandler}
+              id="email"
+              value={userData.email}
+            />
+          </div>
+          <div className={classes.password}>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={changehandler}
+              id="password"
+              value={userData.password}
+            />
+          </div>
+            <button onClick={submitHandler}>{loading ? 'Creating Account...':'Create Account'}</button>
+            <Oauth/>
+          <p className={classes.signin}>
+            Already have an account <Link to="/sign-in">sign in</Link>
+          </p>
         </form>
-    </div>
+      </div>
+    </div>}
+  </>
   )
 }
 

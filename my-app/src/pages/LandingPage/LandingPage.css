@@ -1,0 +1,383 @@
+.home{
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -2;
+}
+
+h2{
+   position: relative;
+   text-align: center;
+}
+
+/* hero */
+
+.hero{
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: space-evenly;
+    height: 600px;
+    width: 100%;
+    padding: 80px 20px;
+    margin: 40px auto;
+    margin-bottom: 90px;
+    border-radius: 12px;
+}
+
+.hero h3{
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color:#34b476;
+}
+
+.hero p{
+    max-width: 600px;
+    font-size: 25px;
+    padding-left: 10px;
+    margin-bottom: 25px;
+    opacity: 0.9;   
+    line-height: 1.5;
+}
+
+.hero_img img{
+    height: 800px;
+    width: 800px;
+}
+
+.cta_button{
+    height: 80px;
+    width: 250px;
+    font-size: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color:#34b476;
+    color: #fff;
+    padding: 12px 24px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+}
+
+.cta_button:hover{
+     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+     background: #18a561;
+     transform: translateX(3px);
+}
+
+/* features */
+
+.features{
+    height: 800px;
+    width: 100%;
+    margin: 70px 0px;
+}
+
+.features h2{
+    text-align: center;
+    margin-bottom: 130px;
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: 300;
+    color: #089953;
+}
+
+.features .feature-grid{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.feature-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    height: 500px;
+    width: 350px;
+    background-color: #f8f9f3;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 10px 25px;
+}
+
+.feature-grid .feature-card h3{
+    font-size: 30px;
+    padding-bottom: 10px;
+    color: #089953;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.feature-card p{
+    font-size: 20px;
+    padding-bottom: 15px;
+    color:#044928;
+}
+
+.feature-card button{
+    padding: 15px 50px;
+    border: none;
+    background-color: #049b52;
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 30px;
+}
+
+/* how-it-works */
+
+.how-it-works{
+    height: 600px;
+    width: 100%;
+    margin: 30px 0px;
+    background-color: white;
+}
+
+.how-it-works h2{
+    text-align: center;
+    font-size: 60px;
+    font-weight: 300;
+    margin-bottom: 130px;
+    color: #089953;
+    text-transform: uppercase;
+}
+
+.how-it-works .steps{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.step{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f8f9f3;
+    height: 400px;
+    width: 350px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 20px 25px;
+}
+
+.step img{
+    height:250px;
+}
+
+.how-it-works h3{
+    font-size: 30px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    color: #089953;
+    text-transform: uppercase;
+}
+
+.how-it-works p{
+    font-size: 20px;
+    padding-bottom: 10px;
+    color:#044928;
+}
+
+/* testimonals */
+
+.testimonals {
+    height: 50rem;
+    width: 100%;
+    margin:40px 0 50px 0;
+    background-color: white;
+}
+
+.testimonal-cards {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonals h2 {
+    text-align: center;
+    font-size: 60px;
+    margin: 130px 0px;
+    color: #089953;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.testimonals .testimonal-card {
+    max-width: 90vh;
+    padding: 20px 25px;
+    display: flex;
+    margin: 0px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonals p {
+    line-height: 30px;
+    font-size: 20px;
+    color: #333;
+    word-spacing:2px;
+}
+
+.testimonals h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #555;
+    text-align: right;
+}
+
+.user_img {
+    height: 250px;
+    width: 230px;
+    margin-right: 30px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+.user_card {
+ flex: 1;
+}
+
+/* call to action */
+
+.cta {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: lightgray;
+}
+
+.icons {
+    height: 200px;
+}
+
+@media (max-width:600px){
+
+
+    .hero{
+        margin:10px 0px;
+        padding: 5px;
+        display: flex;
+        height: 50rem;
+        flex-direction: column-reverse;
+    }
+
+    .hero p {
+        font-size: 22px;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .hero h3 {
+        font-size: 40px;
+    }
+
+    .cta_button {
+        margin-bottom: 40px;
+    }
+
+    .hero_img img{
+        width: 420px;
+        height: 420px;
+    }
+
+    .hero p{
+         font-size: 20px;
+         text-align: left;
+    }
+
+    .features{
+        height: 107rem;
+        margin-bottom: 30px;
+    }
+
+    .features h2 {
+        font-size: 30px;
+        margin: 50px auto;
+    }
+
+    .feature-grid{
+        flex-direction: column;
+    }
+
+    .feature-card {
+        width: 90%;
+    }
+
+    .how-it-works{
+        height: 95rem;
+        margin:0px;
+    }
+
+    .how-it-works h2 {
+        font-size: 30px;
+        margin: 50px auto;
+    }
+    
+    .how-it-works .steps{
+        flex-direction: column;
+        align-items: center;
+        gap:30px
+    }
+    
+    .how-it-works .step {
+        width: 90%;
+    }
+
+    .testimonals{
+        height: 100%;
+        margin-bottom: 60px;
+    }
+
+    .testimonals h2 {
+        font-size: 30px;
+        margin: 50px auto;
+    }
+
+    .testimonal-card{
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .testimonal-card p {
+        margin: 12px 0 0 0;
+        text-align: left;
+    }
+
+    .cta{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+        height: 300px;
+        padding: 0%;
+        margin: 0%;
+    }
+    
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

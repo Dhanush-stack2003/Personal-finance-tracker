@@ -1,0 +1,104 @@
+.latestExpense{
+    width: 300px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.latestIncome{
+    width: 300px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-right: 1px solid black;
+}
+
+.latestIncome span{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #00E676;
+    text-align: center;
+}
+
+.latestIncome p {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.key {
+    color: #ccc;
+}
+
+.latestIncome .value {
+    color: #00E676;
+}
+
+.latestExpense .value {
+    color: #FF5252;
+}
+
+.latestIncome span:last-child{
+    font-size: 15px;
+    color: blue;
+    margin-top: 10px;
+    align-self: flex-end;
+    text-decoration: underline;
+    padding-top: 20px;
+}
+
+
+.latestIncome li{
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.latestExpense span{
+    font-size: 20px;
+    color: #FF5252;
+    text-align: center;
+    margin-bottom:20px;
+}
+
+.latestExpense p {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.latestExpense span:last-child{
+    font-size: 15px;
+    color: blue;
+    margin-top: 10px;
+    align-self: flex-end;
+    text-decoration: underline;
+    padding-top: 20px;
+}
+
+.latestExpense li{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+
+@media (max-width:600px) {
+    .latestTransaction{
+        height: 80vh;
+        flex-direction: column;
+        margin: 0px auto;
+    }
+
+    .latestIncome{
+        border-right: none;
+    }
+}

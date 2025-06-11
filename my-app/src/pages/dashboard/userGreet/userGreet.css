@@ -1,0 +1,220 @@
+.usergreet{
+    display: flex;
+    justify-content: space-evenly;
+    height: 250px;
+    width: 100%;
+    margin: 30px 0px 20px 0px;
+}
+
+.usergreet h3{
+    font-size: 40px;
+    word-spacing: 2px;
+    font-weight: 600;
+    margin: 15px 0px;
+}
+
+.usergreet_left a{
+    width: 220px;
+    font-size: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color:#00E676;
+    text-decoration: none;
+    color: #1E1E2F;
+    padding: 15px 24px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.usergreet_left{
+    width: 400px;
+    height: 220px;
+    padding: 20px;
+    gap: 20px;
+    text-align: center;
+    border-radius: 12px;
+    align-self: center;
+    background-color: #2E1D18
+}
+
+.usergreet_left > h3 {
+  color: #EDE6D6;
+}
+
+.usergreet_left p{
+    font-size: 22px;
+    margin: 20px 0px 40px 0px;
+    color: white;
+}
+
+.statistic_container{
+    display: flex;
+    width: 550px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.statistic_filter{
+  padding: 10px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.statistic_filter select {
+    height: 40px;
+    width: 150px;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 7px;
+    outline: none;
+}
+
+/* usergreet center */
+.totalExpense{
+    width: 520px;
+    height: 213px;
+    display: flex;
+    padding:20px 30px;
+    align-items: center;
+    background-color: #2E1D18;
+    border-radius: 12px;
+}
+
+.totalExpense p{
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.amountFilter{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+}
+
+.amountFilter select{
+  height: 40px;
+  width: 130px;
+  font-size: 15px;
+    padding: 10px;
+    border-radius: 7px;
+    outline: none;
+}
+
+.totalAmount { 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  background-color: #2E1D18;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  position: relative;
+}
+
+.totalAmountContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.totalAmount_left,
+.totalAmount_right,
+.totalAmount_center {
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.totalAmount_left p:first-child,
+.totalAmount_right p:first-child,
+.totalAmount_center p:first-child {
+  font-size: 30px;
+  font-weight: 500;
+  color: #e4ce0d;
+}
+
+.totalAmount_center p:last-child {
+  font-size: 30px;
+  font-weight: 300;
+  color: #e74c3c;
+  text-align: left;
+  width: 150px;
+}
+
+.totalAmount_left p:last-child {
+  font-size: 30px;
+  font-weight: 300;
+  color: darkmagenta;
+  width: 150px;
+  text-align: left;
+}
+
+.totalAmount_right p:last-child {
+  font-size: 30px;
+  width: 150px;
+  font-weight: 300;
+  text-align: left;
+  color: #27ae60; /* Green for Income */
+}
+
+@media (max-width:600px) {
+   .usergreet{
+     flex-direction: column;
+     width: 100%;
+     height: auto;
+     padding: 20px;
+   }
+
+   .usergreet_left{
+    width: 90%;
+    max-width: 350px;
+    margin: 10px auto;
+   }
+
+  .totalExpense {
+    width: 380px;
+    height: 320px;
+   }
+
+   .statistic_container {
+    width: 200px;
+    margin: 10px auto;
+   }
+
+   .statistic_filter {
+    right: 50px;
+   }
+
+   .totalAmount{
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 0px;
+   }
+
+   .amountFilter{
+    margin: 0px auto;
+    right: 30%;
+   }
+
+
+   .totalAmountContainer{
+    flex-direction: column;
+   }
+}

@@ -1,9 +1,12 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Outlet,Navigate } from 'react-router-dom'
 
 function PrivateProfile() {
+
+  const {currentUser} = useSelector((state)=>state.user)
   return (
-    <div>PrivateProfile</div>
+   currentUser? <Outlet/> : <Navigate to={'/sign-in'}/>
   )
 }
 

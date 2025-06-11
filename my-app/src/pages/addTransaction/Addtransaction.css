@@ -1,9 +1,19 @@
-.addtransaction{
+.add_transaction_container {
+    height: 90vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    width: 100%;
 }
 
-.add_transaction_left_side{
+.addtransaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px;
+}
+
+.add_transaction_left_side {
     display: flex;
     flex-direction: column;
     max-width: 60%;
@@ -50,6 +60,7 @@ form{
 
 .category.section{
     font-size: 20px;
+    width: 80%;
 }
 
 .category_container{
@@ -126,12 +137,12 @@ form{
     width: 100%;
 }
 
-button{
+.addtransaction .button_container button{
     font-size: 20px;
+    background-color: #0000ff;
     width: 100px 150px;
     padding: 20px 40px;
     margin: 20px;
-    background-color: teal;
     color: white;
     text-transform: uppercase;
     border: none;
@@ -148,5 +159,22 @@ button{
     height: 90vh;
     object-fit: fill;
     margin-bottom: 0px;
+}
+
+
+@media (max-width:600px) {
+    .add_transaction_container {
+        height: 110vh;
+    }
+
+    .addtransaction p {
+        width: 100%;
+    }
+
+    .category_container {
+        display: flex;
+        width: 500px;
+        flex-wrap: wrap;
+    }
 }
 

@@ -1,0 +1,17 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 0px 0px;
+}
+
+
+@media (max-width:600px) {
+    .dashboard{
+        display: flex;
+        padding-bottom: 30px;
+    }
+
+    .dashboard_sidebar {
+        display: none;
+    }
+}

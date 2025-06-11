@@ -1,138 +1,59 @@
+import { useEffect,useState } from 'react';
 import './TransactionItem.css'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { toast } from "react-toastify";
+import { useSelector } from 'react-redux';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Api from '../privateProfile/Api';
+import Posts from './transactionPost/Posts';
+import Paginate from './pagination/Paginate';
 
-function TransactionItem() {
+function TransactionItem({filteredTransaction}) {
+     const [transactionItems,setTransactionItems] = useState([]);
+     const [loading, setLoading] = useState(false);
+     const [currrentPage,setCurrentPage] = useState(1);
+     const postPerPage = 3
+     const { currentUser } = useSelector((state) => state.user);
+     const location = useLocation();
+     
+     useEffect(()=>{ 
+         async function getItem(){
+           try {
+                 const { data } = await Api.get('/transaction/get-all',{withCredentials:true});
+                 if (data.success) {
+                   setLoading(false);
+                   setTransactionItems(data.data);
+                   console.log(data)
+                 } else {
+                   setLoading(false);
+                   toast.error(data?.response?.message);
+                  }
+                }
+             catch (error) {
+            setLoading(false);
+            toast.error(error.message);
+        }}
+    
+        getItem()
+       },[currentUser._id,filteredTransaction,currrentPage])
+
+
+       const paginate = (pagenumber) => {
+        setCurrentPage(pagenumber);
+       }
+
+      const displayItem =!filteredTransaction && transactionItems.length > 0 ? transactionItems.length : filteredTransaction?.length
+       
   return (
-    <div className="transaction_item_section">
-      <div className="transaction_item_container">
-        <div className="transaction_items">
-          <div className="transaction_values">
-            <div className="transaction_item">
-              <span className="key">Payment Type:</span>
-              <span className="value">Income</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Payment Method:</span>
-              <span className="value">Upi</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Category:</span>
-              <span className="value">Food</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Amount:</span>
-              <span className="value">10000</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Note:</span>
-              <span className="value">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Quisquam neque alias, labore dolor impedit quibusdam.
-              </span>
-            </div>
-          </div>
-          <div className="actions">
-            <p>Edit</p>
-            <p>Delete</p>
-          </div>
-        </div>
-
-        <div className="transaction_items">
-          <div className="transaction_values">
-            <div className="transaction_item">
-              <span className="key">Payment Type:</span>
-              <span className="value">Expense</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Payment Method:</span>
-              <span className="value">Upi</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Category:</span>
-              <span className="value">Food</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Amount:</span>
-              <span className="value">10000</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key note">Note:</span>
-              <span className="value">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-                labore minus provident repellat minima voluptatum.
-              </span>
-            </div>
-          </div>
-          <div className="actions">
-            <Link to='/edit-transaction'><p>Edit</p></Link>
-            <p>Delete</p>
-          </div>
-        </div>
-
-        <div className="transaction_items">
-          <div className="transaction_values">
-            <div className="transaction_item">
-              <span className="key">Payment Type:</span>
-              <span className="value">Expense</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Payment Method:</span>
-              <span className="value">Upi</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Category:</span>
-              <span className="value">Food</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Amount:</span>
-              <span className="value">10000</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key note">Note:</span>
-              <span className="value">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis
-                aspernatur a id omnis harum nulla.
-              </span>
-            </div>
-          </div>
-          <div className="actions">
-            <p>Edit</p>
-            <p>Delete</p>
-          </div>
-        </div>
-
-        <div className="transaction_items">
-          <div className="transaction_values">
-            <div className="transaction_item">
-              <span className="key">Payment Type:</span>
-              <span className="value">Expense</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Payment Method:</span>
-              <span className="value">Upi</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Category:</span>
-              <span className="value">Food</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key">Amount:</span>
-              <span className="value">10000</span>
-            </div>
-            <div className="transaction_item">
-              <span className="key note">Note:</span>
-              <span className="value">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              </span>
-            </div>
-          </div>
-          <div className="actions">
-            <p>Edit</p>
-            <p>Delete</p>
-          </div>
-        </div>
-      </div>
+    <>
+    <div className={`transactionItem_sidebar ${location.pathname === '/transaction-item' ? 'active' : ''}`}>
+      <Sidebar/>
     </div>
+    <div className="transaction_item_section">
+      <Posts transactionItems={filteredTransaction || filteredTransaction?.length > 0 ? filteredTransaction : transactionItems} loading={loading} currentPage={currrentPage}/>
+      {displayItem > postPerPage  && <Paginate totalPosts={transactionItems.length} postPerPage={postPerPage} paginate={paginate}/>}
+    </div>
+    </>
   );
 }
 

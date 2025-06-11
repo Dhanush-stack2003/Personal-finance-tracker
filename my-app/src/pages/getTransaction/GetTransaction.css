@@ -3,6 +3,10 @@
     display: flex;
 }
 
+.get_transaction span{
+    color: gray;
+}
+
 .title{
     font-size: 30px;
     font-weight: bold;
@@ -10,81 +14,12 @@
     margin-bottom: 20px;    
 }
 
-.get_transaction_left_side{
-    display: flex;
-    flex-direction: column;
-    max-width: 60%;
-    padding: 20px;
-    border-right: 1px solid lightgray;
-}
-
-.get_transaction_left_side form{
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-}
-
-.choose_payment_method_container{
-    display: flex;
-    padding: 10px;
-}
-
-.choose_payment_method{
-    display: flex;
-    margin: 10px;
-}
-
-.choose_category_container{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-}
-
-.choose_category{
-    margin: 10px;
-}
-
-.choose_payment_type_container{
-    display: flex;
-    padding: 10px;
-}
-
-.choose_payment_type{
-    margin: 10px;
-}
-
-.choose_filter_date_container{
-    display: flex;
-    padding: 10px;
-}
-
-.choose_date{
-    margin: 10px;
-}
-
-.choose_date input{
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid black;
-}
-
-.get_transaction_left_side .radio{
-    display: flex;
-    align-items: center;
-}
-
-.section{
-    margin-bottom: 20px;
+@media (max-width:600px) {
+    .get_transaction {
+        flex-direction: column;
+        width: 500px;
+        margin: 0 auto;
+    }
 }
 
 
-.get_transaction_left_side button{
-    background-color: brown;
-}
-
-.get_transaction_right_side{
-    display: flex;
-    padding: 20px;
-}
