@@ -1,5 +1,4 @@
 import './financeTrack.css'
-import FilterDate from '../filterDate/filterDate';
 import RecentTransaction from '../recentTransaction/recentTransaction';
 import { BarChart,Bar,ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts'
 import { useEffect, useState } from 'react';
@@ -22,7 +21,7 @@ function FinanceTrack() {
       setTransaction(data.message)
     }
     allTransaction()
-  },[])
+  },[currentUser._id])
 
     
   return (

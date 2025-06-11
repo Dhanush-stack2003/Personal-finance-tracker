@@ -42,7 +42,7 @@ function EditTransaction() {
       setLoading(false)
     }
     getItem()
-  },[])
+  },[params.transactionId])
 
 
   const changeHandler = (e) => {
@@ -66,9 +66,9 @@ function EditTransaction() {
     }
   }
 
-  const dateFormat = (date) => {
-    return date?date.toISOString().split('T')[0]: "";
-  }
+  // const dateFormat = (date) => {
+  //   return date?date.toISOString().split('T')[0]: "";
+  // }
  
   return (
     <div className="edit_transaction">

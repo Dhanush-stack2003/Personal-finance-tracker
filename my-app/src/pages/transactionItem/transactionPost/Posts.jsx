@@ -19,7 +19,7 @@ function Posts({transactionItems,loading,currentPage}) {
 
   const currentPost = useMemo(() => {
     return transactionItems.slice(indexOfFirstPage, indexOfLastPage)
-  }, [transactionItems, currentPage,postPerPage,loading]);
+  }, [transactionItems, currentPage,postPerPage,loading,indexOfFirstPage,indexOfLastPage]);
   
   return (
     <>

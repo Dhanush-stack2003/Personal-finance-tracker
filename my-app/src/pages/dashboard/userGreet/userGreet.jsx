@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux'
 function UserGreet() {
 
   const [date,setDate] = useState('one_month');
-  const [datas,setData] = useState([]);
   const [pie,setPie] = useState([]);
   const { currentUser } = useSelector(state => state.user)
   const [amounts,setAmounts] = useState({
@@ -36,7 +35,6 @@ function UserGreet() {
             if(!data){
               toast.error(data.message)
             }
-            setData(data.message)
             let transaction = data.message;
 
             transaction.forEach((item) => {
@@ -58,7 +56,7 @@ function UserGreet() {
     totalAmount()
     getFilterData()
 
-  },[date,currentUser._id])      
+  },[date,currentUser._id,expensePieData])      
        
      const COLORS = ["#FF6B6B","#A78BFA", "#6EE7B7", "#60A5FA", "#FBBF24"];
 

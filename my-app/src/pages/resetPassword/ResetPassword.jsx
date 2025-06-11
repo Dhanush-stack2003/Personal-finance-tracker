@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './ResetPassword.css'
 import Api from '../privateProfile/Api'
-import { useSelector } from 'react-redux'
 import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './LandingPage.css'
 import insights from '../../Asserts/investigate.png'
 import transaction_log from '../../Asserts/financial_report.png'
@@ -16,9 +15,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
 function Home() {
-const [loading,setLoading] = useState(false);
-const [error,setError] = useState(null);
-const [data,setData] = useState({});
+
 
   return (
     <div className="home_header">

@@ -28,7 +28,7 @@ function Paginate({postPerPage, totalPosts, paginate}) {
         <ul>
             {pageNumbers.map((number)=>{
                 return <li key={number}>
-                    <a onClick={()=>paginate(number)} className="currentPage">{number}</a>
+                    <p onClick={()=>paginate(number)} className="currentPage">{number}</p>
                 </li>
             })}
         </ul>

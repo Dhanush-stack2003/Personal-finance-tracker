@@ -31,11 +31,11 @@ function RecentTransaction() {
 
   const incomeCount = useMemo(()=>
   transactions.filter((t)=>t.paymentType === 'Income').length
-  )
+  ,[transactions])
 
   const expenseCount = useMemo(()=>
   transactions.filter((t)=>t.paymentType === 'Expense').length  
-  )
+  ,[transactions])
 
   return (
       <div className="latestTransaction">

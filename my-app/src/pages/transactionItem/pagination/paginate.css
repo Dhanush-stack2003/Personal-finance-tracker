@@ -14,14 +14,14 @@
     list-style: none;  
 }
 
-.pagination ul li a {
+.pagination ul li p {
     border: 1px solid #208d58;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
 }
 
-.pagination ul li a:hover {
+.pagination ul li p:hover {
     background-color: #208d58;
     color: #fff;
 }
