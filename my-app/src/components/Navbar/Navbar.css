@@ -78,19 +78,30 @@
   color: white;
 }
 
-@media (max-width:800px){
+@media (max-width:600px){
 
     .navbar{
-        padding:0px 20px;
-        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 94%;
+        padding: 0px 12px;
     }
     .navbar h1{
         font-size: 25px;
+        padding: 0%;
+        margin: 0%;
     }
 
+    .menubar ul img {
+        height: 35px;
+        width: 35px;
+        padding: 0%;
+        margin: 0%;
+    }
 
-    .menubar {
-        width: 80px;
+    .menubar ul li {
+        margin: 0px;
     }
 
      .menubar .account_manage ul{
@@ -98,7 +109,7 @@
         background-color: #34B476;
         position: absolute;
         top: 100%;
-        left:-90%;
+        left:-100%;
         padding:10px 20px;
         width: 130px;
         list-style: none;

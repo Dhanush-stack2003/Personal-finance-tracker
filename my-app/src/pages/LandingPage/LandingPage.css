@@ -287,12 +287,13 @@ h2{
     }
 
     .cta_button {
-        margin-bottom: 40px;
+
+        margin:40px 50px;
     }
 
     .hero_img img{
-        width: 420px;
-        height: 420px;
+        width: 350px;
+        height: 350px;
     }
 
     .hero p{
