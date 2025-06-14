@@ -17,8 +17,8 @@
 @media (max-width:600px) {
     .get_transaction {
         flex-direction: column;
-        width: 500px;
-        margin: 0 auto;
+        width: auto;
+        margin: 0;
     }
 }
 

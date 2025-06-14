@@ -46,6 +46,7 @@
     font-size: 22px;
     margin: 20px 0px 40px 0px;
     color: white;
+    text-align: center;
 }
 
 .statistic_container{
@@ -174,24 +175,36 @@
 @media (max-width:600px) {
    .usergreet{
      flex-direction: column;
-     width: 100%;
+     justify-content: center;
+     width: 95%;
      height: auto;
-     padding: 20px;
+     padding: 10px;
+     margin: 5px 0px;
    }
 
    .usergreet_left{
-    width: 90%;
+    width: 95%;
+    height: 190px;
     max-width: 350px;
-    margin: 10px auto;
+    margin: 10px 0px;
+    padding: 0px;
+   }
+
+   .usergreet_left > h3 {
+    font-size: 25px;
+   }
+
+   .usergreet_left p {
+    font-size: 18px;
    }
 
   .totalExpense {
-    width: 380px;
-    height: 320px;
+    width: 290px;
+    height: 280px;
    }
 
    .statistic_container {
-    width: 200px;
+    width: 90%;
     margin: 10px auto;
    }
 
@@ -202,10 +215,11 @@
    .totalAmount{
     display: flex;
     flex-direction: column;
-    height: 30vh;
+    height: 35vh;
     align-items: center;
     width: 90%;
-    margin-bottom: 0px;
+    padding: 15px;
+    margin: 5px 0px;
    }
 
    .amountFilter{

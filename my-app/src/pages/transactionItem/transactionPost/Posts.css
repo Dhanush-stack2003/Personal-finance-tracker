@@ -60,3 +60,19 @@
     border-radius: 5px; 
     text-decoration: none; 
 }
+
+@media (max-width:600px) {
+    .transaction_items {
+        width: 300px;
+        margin: 20px 0px;
+    }
+
+    .actions a:nth-child(1){
+        width: 100px;
+        padding: 10px 0px;
+    }
+    .actions a:nth-child(2){
+        width: 100px;
+        padding: 10px 0px;
+    }
+}

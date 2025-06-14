@@ -16,7 +16,7 @@
 .add_transaction_left_side {
     display: flex;
     flex-direction: column;
-    max-width: 60%;
+    width: 60%;
     margin: 30px 20px;
 }
 .addtransaction p{
@@ -140,7 +140,7 @@ form{
 .addtransaction .button_container button{
     font-size: 20px;
     background-color: #0000ff;
-    width: 100px 150px;
+    width: 280px;
     padding: 20px 40px;
     margin: 20px;
     color: white;
@@ -164,17 +164,27 @@ form{
 
 @media (max-width:600px) {
     .add_transaction_container {
-        height: 110vh;
+        height: 160vh;
+        width: auto;
     }
 
     .addtransaction p {
         width: 100%;
+        margin: 5px 10px;
+    }
+
+    .add_transaction_left_side {
+        width: 330px;
     }
 
     .category_container {
         display: flex;
-        width: 500px;
+        width: auto;
         flex-wrap: wrap;
+    }
+
+     .addtransaction .button_container button {
+        padding: 15px 35px;
     }
 }
 

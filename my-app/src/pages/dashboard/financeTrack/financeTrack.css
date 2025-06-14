@@ -46,7 +46,7 @@
 @media (max-width:600px) {
 
     .financetrack{
-        width: 100%;
+        width: 90%;
     }
     .financeTrackContainer {
         display: flex;

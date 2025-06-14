@@ -1,7 +1,8 @@
 .get_transaction_left_side{
     display: flex;
     flex-direction: column;
-    max-width: 60%;
+    width: 450px;
+    height: 90vh;
     padding: 20px;
     border-right: 1px solid lightgray;
 }
@@ -102,5 +103,71 @@
 @media (max-width:600px) {
     .get_transaction_left_side {
         border-right: none;
+        width: 89%;
+        height: auto;
+    }
+
+    .get_transaction_left_side p {
+        font-size: 25px;
+        margin: 0;
+    }
+
+    .get_transaction_left_side form {
+        margin: 0%;
+        padding: 0%;
+    }
+    
+    .choose_payment_method.section,
+    .choose_payment_type.section,
+    .choose_category.section {
+        width: 70%;
+    }
+
+    .choose_amount input {
+        width: 150px;
+    }
+
+    .choose_filter_date.section {
+        width: 90%;
+    }
+
+    .choose_date {
+        width: 50%;
+        margin: 0%;
+    }
+
+    .choose_date p{
+        font-size: 18px;
+    }
+    
+    .choose_date input {
+        font-size: 15px;
+        width: 110px;
+    }
+
+    .choose_filter_amount.section {
+        width: 90%;
+    }
+
+    .choose_amount {
+        width: 50%;
+        margin: 0%;
+    }
+
+    .choose_amount p {
+        font-size: 18px;
+    }
+
+    .choose_amount input {
+        font-size: 15px;
+        width: 100px;
+    }
+
+    .get_transaction_left_side .find_transaction {
+        padding: 15px 0px;
+        font-size: 18px;
+        width: 300px;
+        border-radius: 5px;
+        margin: 0 auto;
     }
 }

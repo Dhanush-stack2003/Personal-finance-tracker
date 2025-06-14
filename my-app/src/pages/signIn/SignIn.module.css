@@ -18,7 +18,7 @@
 }
 
 .signin_head p{
-    color: rgb(48, 47, 47);
+    color: gray;
     font-size: 18px;
     padding: 10px 0px;
 }
@@ -83,12 +83,28 @@ button:hover{
 }
 
 @media (max-width:600px) {
-    .signin_head {
-        text-align: center;
-    }
 
     .signin {
         margin: 20px auto;
+        width: 280px;
+    }
+
+    .signin_head {
+        width: auto;
+    }
+
+    .signin form {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .signin h1 {
+        font-size: 25px;
+    }
+
+    .signin p {
+        width: 80%;
+        font-size: 13px;
     }
 
     .signin h1,p {
@@ -97,20 +113,26 @@ button:hover{
     }
 
     .forgot_password {
-        margin-right: 30px;
+        font-size: 15px;
+        margin-right: 20px;
     }
 
     .signin .email input,.password input {
-        width: 400px;
-        margin: 20px 30px;
+        width: 290px;
+        font-size: 16px;
+        margin: 15px 20px;
     }
 
     .signin button {
-        width: 440px;
-        margin: 20px 30px;
+        width: 340px;
+        font-size: 18px;
+        border-radius: 5px;
+        margin: 15px;
+        padding: 15px 10px;
     }
 
     .signin .signup {
-        margin: 15px 30px;
+        font-size: 15px;
+        margin: 10px 20px;
     }
 }

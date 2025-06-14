@@ -38,6 +38,11 @@
     border-radius: 5px;
 }
 
+.next_page span,
+.previous_page span {
+    color: #fff;
+}
+
 .previous_arrow {
     display: flex;
     justify-content: center;
@@ -59,6 +64,8 @@
     font-size: 1rem;
 }
 
+
+
 .previous_btn,
 .next_btn {
     color: #fff;
@@ -72,9 +79,26 @@
 
 @media (max-width:600px){
     .pagination {
-        margin:0 auto;
+        width: 290px;
+        margin:0;
         padding-bottom: 40px;
         justify-self: end;
         align-self: flex-end;
+    }
+
+    .pagination ul {
+        margin: 0px 10px;
+    }
+
+    .pagination ul li p {
+        padding: 5px 10px;
+        margin: 0%;
+    }
+
+    .previous_page,
+    .next_page {
+        font-size: 15px;
+        padding: 8px 8px;
+        color: #fff;
     }
 }

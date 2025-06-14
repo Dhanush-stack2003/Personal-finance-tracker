@@ -1,6 +1,7 @@
 import './getTransaction_left.css'
 import Api from "../../privateProfile/Api";
 import { useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 
 function GetTransactionLeft({changeHandler,filteredRadio,setFilterRadio,setFilteredTransaction}) {
     
@@ -22,11 +23,10 @@ function GetTransactionLeft({changeHandler,filteredRadio,setFilterRadio,setFilte
         try {
           const { data } = await Api.get(`/transaction/filter?${params}`);
           if (data.success) {
-            console.log(data.message);
             setFilteredTransaction(data.message);
           }
         } catch (error) {
-          console.log(error.message);
+          toast.error(error.message)
         }
       };
 

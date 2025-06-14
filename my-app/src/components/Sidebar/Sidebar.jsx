@@ -7,12 +7,34 @@ import { MdFormatListBulletedAdd } from "react-icons/md";
 import { GrContact } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
 import user_icon from '../../Asserts/default_profile_icon.jpg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Api from '../../pages/privateProfile/Api'
+import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
+import { SignOutStart,SignOutFailure,SignOutSuccess} from '../../store/userSlice/userSlice'
 
 function Sidebar() {
 
   const [collapsed, setCollapsed] = useState(false);
   const { currentUser } = useSelector(state => state.user);
+  const dispatch  = useDispatch();
+  const navigate = useNavigate()
+  
+  const logoutHandler = async () => {
+    try {
+      dispatch(SignOutStart());
+      const { data } = await Api.get("/auth/log-out", {
+        withCredentials: true,
+      });
+      if (data.success) {
+        dispatch(SignOutSuccess());
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      dispatch(SignOutFailure());
+      toast.error(error.message);
+    }
+  };
 
   const toggleSidebar = () => {
     setCollapsed(collapsed => !collapsed)
@@ -66,7 +88,7 @@ function Sidebar() {
             <a href="/logout" className="sidebar_label">
               <MdLogout />
             </a>
-            <a href="/logout" className="sidebar_link">
+            <a onClick={logoutHandler} className="sidebar_link">
               Logout
             </a>
           </li>

@@ -29,7 +29,9 @@
     .recent_transaction{
         display: flex;
         height: 530px;
-        width: 350px;
+        width:350px;
+        margin: 0px;
+        padding: 0px;
     }
 
     .recent_transaction p{

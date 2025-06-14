@@ -22,7 +22,6 @@ function ResetPassword() {
       const { data } = await Api.post('/auth/verify-email',{email:email})
       if(!data){
         toast.error(data.message)
-        console.log(data)
       }
       toast.success(data.message)
       setOtpsend(true)
@@ -49,8 +48,6 @@ function ResetPassword() {
         navigate('/add-transaction')
       }
     }
-
-      // e.target.value.replace(/[^0-9]/g," ");
 
     const inputHandler = (e,index) => {
       if(e.target.value.length > 0 && index < inputRef.current.length - 1 ){
@@ -107,7 +104,7 @@ function ResetPassword() {
       </div>}
 
       {isOtpVerified && sendOtp && <div className="new_password">
-        <div className='heading'><p>Reset Password</p></div>
+        <p>Enter new Password</p>
         <form>
           <input type='password' placeholder='New password' onChange={(e)=>setNewPassword(e.target.value)}/>
           <input type='password' placeholder='Re-enter password' onChange={(e)=>setReEnterPassword(e.target.value)}/>

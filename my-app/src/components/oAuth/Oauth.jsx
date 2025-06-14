@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { SignInSuccess,SignInStart,SignInFailure } from '../../store/userSlice/userSlice';
 import Api from '../../pages/privateProfile/Api';
+import { toast } from 'react-toastify';
 
 const Oauth = () => {
     const navigate = useNavigate();
@@ -14,7 +15,6 @@ const Oauth = () => {
             const Provider = new GoogleAuthProvider();
             const Auth = getAuth(app)
             const result = await signInWithPopup(Auth,Provider)
-            console.log(result)
             if(result.user){
                 dispatch(SignInStart())
              const user = await Api.post('/auth/google-auth',{
@@ -24,17 +24,15 @@ const Oauth = () => {
                 },{withCredentials:true})
             if(user.data.success){
                 dispatch(SignInSuccess(user.data.message))
-                console.log("user verified")
-                console.log("user"+ user.data)
                 navigate('/')
             }}
             else{
             dispatch(SignInFailure(result.error))
-            console.log(result.error)
+            toast.error(result.error)
         }
     } catch (error) {
-        console.log(error)
         dispatch(SignInFailure(error.message))
+        toast.error(error.message)
         }
     }
 

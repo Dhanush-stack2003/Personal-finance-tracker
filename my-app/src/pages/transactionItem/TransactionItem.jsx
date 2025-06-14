@@ -23,7 +23,6 @@ function TransactionItem({filteredTransaction}) {
                  if (data.success) {
                    setLoading(false);
                    setTransactionItems(data.data);
-                   console.log(data)
                  } else {
                    setLoading(false);
                    toast.error(data?.response?.message);
