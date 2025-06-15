@@ -43,7 +43,7 @@ function SignUp() {
     }
   return (
     <>
-    {loading ? "<p>loading...<p>" : <div className={classes.signup}>
+       <div className={classes.signup}>
       <div className={classes.signup_leftside}>
         <div className={classes.signup_head}>
           <h1>Create a New Account</h1>
@@ -84,9 +84,9 @@ function SignUp() {
           </p>
         </form>
       </div>
-    </div>}
-  </>
+    </div>
+   </>
   )
 }
 
-export default SignUp
+export default SignUp;
