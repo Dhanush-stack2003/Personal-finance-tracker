@@ -22,6 +22,10 @@ app.use(express.json())
 
 mongodb.connect(process.env.MONGODB).then(()=>console.log("mongodb connected")).catch((err)=>console.log(err))
 
+app.get('/api/test',(req,res)=>{
+    return res.send("backend working fine")
+})
+
 app.use('/api/auth',AuthRouter)
 
 app.use('/api/transaction',transRouter)
