@@ -5,10 +5,12 @@ import { PieChart,Pie,Legend,Tooltip } from 'recharts'
 import Api from '../../privateProfile/Api'
 import {toast} from 'react-toastify'
 import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom';
 
 function UserGreet() {
 
   const [date,setDate] = useState('one_month');
+  const navigate = useNavigate()
   const [pie,setPie] = useState([]);
   const { currentUser } = useSelector(state => state.user)
   const [amounts,setAmounts] = useState({
@@ -69,7 +71,7 @@ function UserGreet() {
         <div className="usergreet_left">
           <h3>Hello Dhanush!</h3>
           <p>Track your finance and spend wisely</p>
-          <a href='/add-transaction'>+Add Transation</a>
+          <a href='/add-transaction'>+Add Transaction</a>
         </div>
 
         <div className="usergreet_center">
