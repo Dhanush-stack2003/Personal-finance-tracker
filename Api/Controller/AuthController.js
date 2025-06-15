@@ -169,7 +169,7 @@ export const RefreshToken = async (req,res) => {
     try {
         const decoded = jwt.verify(RefreshToken,process.env.REFRESH_TOKEN_KEY);
 
-       const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
+        const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
 
        res.cookie('AccessToken',newToken,{
             httpOnly:true,
@@ -179,7 +179,6 @@ export const RefreshToken = async (req,res) => {
 
         return res.status(200).json({RefreshedAccessToken:newToken})
     } catch (error) {
-        console.log(error.message)
         return res.status(500).json({success:false,message:"Invalid Token"})
 
     }

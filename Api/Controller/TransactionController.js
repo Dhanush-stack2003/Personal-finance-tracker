@@ -14,7 +14,6 @@ export const createTransaction = async(req,res) => {
         note
     })
     await newTransaction.save();
-    console.log(newTransaction)
     return res.status(200).json({success:true,message:"Transaction Added"})
     } catch (error) {
         return res.status(500).json({success:false,message:error.message})
@@ -87,12 +86,14 @@ export const filterTransaction = async(req,res) => {
         if(typeof category === 'string' && category?.trim()) {
             query.category = { $regex : category.trim(),$options:'i'}
         }
-        if(maxAmount || minAmount){
+        if(maxAmount && minAmount){
+            
             query.amount ={}
             if(maxAmount) query.amount.$lte = Number(maxAmount)
             if(minAmount) query.amount.$gte = Number(minAmount)
         }
-        if(maxDate || minDate){
+        if(maxDate && minDate){
+            
             query.date = {} 
             
             if(maxDate) query.date.$lte = new Date(maxDate)

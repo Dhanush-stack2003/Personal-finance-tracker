@@ -18,6 +18,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start":"node Api/index.js",
     "devStart": "nodemon Api/index.js"
   },
   "keywords": [],
