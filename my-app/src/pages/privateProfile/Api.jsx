@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {toast} from 'react-toastify'
 const Api = axios.create({
-        baseURL:'http://localhost:4000/api',
-        withCredentials:true
- })
+  baseURL: "https://finance-tracker-backend-fmcj.onrender.com/api",
+  withCredentials: true,
+});
 
  Api.interceptors.response.use((response)=>response,
  async (error)=>{
