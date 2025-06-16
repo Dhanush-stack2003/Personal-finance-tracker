@@ -27,7 +27,7 @@ function Addtransaction() {
       if(data.success){
         setLoading(false)
         toast.success("transaction added")
-        navigate('/get-transaction')
+        navigate('/transaction-item')
       }
     } catch (error) {
       setLoading(false)

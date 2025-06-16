@@ -62,6 +62,7 @@ export const SignIn = async(req,res) => {
         httpOnly:true,
         secure:isProd,
         sameSite:isProd ? 'none' : 'strict',
+        maxAge: 15 * 60 * 1000
      })
 
      res.cookie('RefreshToken',RefreshToken,{
@@ -94,6 +95,7 @@ export const googleAuth = async (req,res) => {
               httpOnly: true,
               secure: isProd,
               sameSite: isProd ? "none" : "strict",
+              maxAge: 15 * 60 * 1000,
             });
 
             res.cookie("RefreshToken", RefreshToken, {
@@ -132,6 +134,7 @@ export const googleAuth = async (req,res) => {
                httpOnly: true,
                secure: isProd,
                sameSite: isProd ? "none" : "strict",
+               maxAge: 15 * 60 * 1000,
              });
 
              res.cookie("RefreshToken", RefreshToken, {
@@ -158,6 +161,7 @@ export const SignOut = (req,res) => {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "none" : "strict",
+          maxAge: 15 * 60 * 1000,
         });
 
         res.clearCookie("RefreshToken", RefreshToken, {
@@ -190,6 +194,7 @@ export const RefreshToken = async (req,res) => {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "none" : "strict",
+          maxAge: 15 * 60 * 1000,
         });
         
         return res.status(200).json({RefreshedAccessToken:newToken})

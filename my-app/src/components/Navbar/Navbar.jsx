@@ -46,7 +46,9 @@ const location = useLocation()
             />
             <div className="account_manage">
               <ul>
-                <Link to='/get-transaction' style={{textDecoration:'none'}}><li>All transactions</li></Link>
+                <Link to='/' style={{textDecoration:'none'}}><li>Dashboard</li></Link>
+                <Link to='/transaction-item' style={{textDecoration:'none'}}><li>All transactions</li></Link>
+                <Link to='/get-transaction' style={{textDecoration:'none'}}><li>Filter transaction</li></Link>
                 <Link to='/add-transaction' style={{textDecoration:'none'}}><li>Add transaction</li></Link>
                 <Link onClick={logoutHandler} style={{textDecoration:'none'}}><li>Log out</li></Link>
               </ul>
