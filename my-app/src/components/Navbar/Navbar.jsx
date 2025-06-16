@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import './Navbar.css'
 import Api from '../../pages/privateProfile/Api'
 import {toast} from 'react-toastify'
@@ -11,6 +11,7 @@ function Navbar() {
 const {currentUser} = useSelector((state)=>state.user)
 const dispatch = useDispatch();
 const navigate = useNavigate();
+const location = useLocation()
 
   const logoutHandler = async () => {
     try {
@@ -33,15 +34,15 @@ const navigate = useNavigate();
           Finance tracker
         </h1></a>
       </div>
-      <div className="menubar">
+      {!location.pathname === '/' && <div className="menubar">
         <ul>
           <li className='home_btn'>
               <a href='/dashboard'>Home</a>
           </li>
-          <li className="img">
+         <li className="img">
             <img
               src={currentUser?.photoURL}
-              alt="userlogo"
+              alt="log."
             />
             <div className="account_manage">
               <ul>
@@ -52,7 +53,7 @@ const navigate = useNavigate();
             </div>
           </li>
         </ul>
-      </div>
+      </div>}
     </div>
   );
 }

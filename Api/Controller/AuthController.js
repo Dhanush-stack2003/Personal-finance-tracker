@@ -152,6 +152,8 @@ export const googleAuth = async (req,res) => {
 
 export const SignOut = (req,res) => {
     try {
+        const isProd = process.env.NODE_ENV
+        
         res.clearCookie("AccessToken", AccessToken, {
           httpOnly: true,
           secure: isProd,
