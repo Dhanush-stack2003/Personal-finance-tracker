@@ -56,16 +56,18 @@ export const SignIn = async(req,res) => {
 
      const RefreshToken = jwt.sign({id:userId},process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'})
 
+     const isProd = process.env.NODE_ENV === 'production'
+
      res.cookie('AccessToken',AccessToken,{
         httpOnly:true,
-        secure:process.env.NODE_TOKEN === 'production',
-        sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
+        secure:isProd,
+        sameSite:isProd ? 'none' : 'strict',
      })
 
      res.cookie('RefreshToken',RefreshToken,{
         httpOnly:true,
-        sameSite:process.env.NODE_TOKEN === 'production' ? 'none' :'strict',
-        secure:process.env.NODE_TOKEN === 'production',
+        secure:isProd,
+        sameSite:isProd ? 'none' :'strict',
         maxAge:7* 24 * 60 * 60 * 1000
      })
 
@@ -86,17 +88,20 @@ export const googleAuth = async (req,res) => {
             const userId = isUserExist._id
             const AccessToken = jwt.sign({id:userId},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
             const RefreshToken = jwt.sign({id:userId},process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'})
-            res.cookie('AccessToken',AccessToken,{
-                httpOnly:true,
-                sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
-                secure:process.env.NODE_TOKEN === 'production'
-            })
-            res.cookie('RefreshToken',RefreshToken,{
-                httpOnly:true,
-                sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
-                secure:process.env.NODE_TOKEN === 'production',
-                maxAge: 7 * 24 * 60 * 60 * 1000
-            })
+            const isProd = process.env.NODE_ENV === "production";
+
+            res.cookie("AccessToken", AccessToken, {
+              httpOnly: true,
+              secure: isProd,
+              sameSite: isProd ? "none" : "strict",
+            });
+
+            res.cookie("RefreshToken", RefreshToken, {
+              httpOnly: true,
+              secure: isProd,
+              sameSite: isProd ? "none" : "strict",
+              maxAge: 7 * 24 * 60 * 60 * 1000,
+            });
 
             const { password:pass,...rest} = isUserExist._doc
 
@@ -121,16 +126,19 @@ export const googleAuth = async (req,res) => {
 
              const AccessToken = jwt.sign({ id: userId },process.env.ACCESS_TOKEN_KEY,{ expiresIn: "15m" });
              const RefreshToken = jwt.sign({ id: userId },process.env.REFRESH_TOKEN_KEY,{expiresIn:'7d'});
+             const isProd = process.env.NODE_ENV === "production";
+
              res.cookie("AccessToken", AccessToken, {
                httpOnly: true,
-               sameSite:process.env.NODE_TOKEN === "production" ? "none" : "strict",
-               secure: process.env.NODE_TOKEN === "production",
+               secure: isProd,
+               sameSite: isProd ? "none" : "strict",
              });
+
              res.cookie("RefreshToken", RefreshToken, {
                httpOnly: true,
-               sameSite:process.env.NODE_TOKEN === "production" ? "none" : "strict",
-               secure: process.env.NODE_TOKEN === "production",
-               maxAge: 7 * 24 * 60 * 60 * 1000
+               secure: isProd,
+               sameSite: isProd ? "none" : "strict",
+               maxAge: 7 * 24 * 60 * 60 * 1000,
              });
 
              const {pass:password,...rest} = user._doc
@@ -144,16 +152,19 @@ export const googleAuth = async (req,res) => {
 
 export const SignOut = (req,res) => {
     try {
-        res.clearCookie("AccessToken", {
+
+        res.cookie("AccessToken", AccessToken, {
           httpOnly: true,
-          secure: process.env.NODE_TOKEN === "production",
-          sameSite: process.env.NODE_TOKEN === "production" ? "none" : "strict",
+          secure: isProd,
+          sameSite: isProd ? "none" : "strict",
         });
-        res.clearCookie('RefreshToken',{
-            httpOnly:true,
-            secure:process.env.NODE_TOKEN === 'production',
-            sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict'
-        })
+
+        res.cookie("RefreshToken", RefreshToken, {
+          httpOnly: true,
+          secure: isProd,
+          sameSite: isProd ? "none" : "strict",
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
 
         
         return res.status(200).json({success:true,message:'Logged out'})
@@ -172,12 +183,13 @@ export const RefreshToken = async (req,res) => {
         
         const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
         
-        res.cookie('AccessToken',newToken,{
-            httpOnly:true,
-            sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
-            secure:process.env.NODE_TOKEN === 'production',
-        })
-        console.log(process.env.NODE_TOKEN)
+        const isProd = process.env.NODE_ENV
+        
+        res.cookie("AccessToken", AccessToken, {
+          httpOnly: true,
+          secure: isProd,
+          sameSite: isProd ? "none" : "strict",
+        });
         
         return res.status(200).json({RefreshedAccessToken:newToken})
     } catch (error) {
@@ -373,14 +385,6 @@ export const resetPassword = async (req,res) => {
          await user.save()
 
          return res.status(201).json({success:true,message:"Password has been updated"})
-    } catch (error) {
-        return res.status(500).json({success:false,message:error.message})
-    }
-}
-
-export const isAccountVerified = async (req,res) => {
-    try {
-        return res.status(200).json({success:true,message:"user is verified"})
     } catch (error) {
         return res.status(500).json({success:false,message:error.message})
     }
