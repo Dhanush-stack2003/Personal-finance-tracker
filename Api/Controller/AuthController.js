@@ -154,7 +154,8 @@ export const SignOut = (req,res) => {
             secure:process.env.NODE_TOKEN === 'production',
             sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict'
         })
-    
+
+        
         return res.status(200).json({success:true,message:'Logged out'})
     } catch (error) {
         return res.status(500).json({success:false,message:error.message})
@@ -163,20 +164,21 @@ export const SignOut = (req,res) => {
 
 export const RefreshToken = async (req,res) => {
     const RefreshToken  = req.cookies.RefreshToken;
-
+    
     if(RefreshToken == null) return res.status(403).json({success:false,message:"no token provided"});
-
+    
     try {
         const decoded = jwt.verify(RefreshToken,process.env.REFRESH_TOKEN_KEY);
-
+        
         const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
-
-       res.cookie('AccessToken',newToken,{
+        
+        res.cookie('AccessToken',newToken,{
             httpOnly:true,
             sameSite:process.env.NODE_TOKEN === 'production' ? 'none' : 'strict',
             secure:process.env.NODE_TOKEN === 'production',
         })
-
+        console.log(process.env.NODE_TOKEN)
+        
         return res.status(200).json({RefreshedAccessToken:newToken})
     } catch (error) {
         return res.status(500).json({success:false,message:"Invalid Token"})
