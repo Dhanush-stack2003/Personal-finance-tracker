@@ -152,14 +152,13 @@ export const googleAuth = async (req,res) => {
 
 export const SignOut = (req,res) => {
     try {
-
-        res.cookie("AccessToken", AccessToken, {
+        res.clearCookie("AccessToken", AccessToken, {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "none" : "strict",
         });
 
-        res.cookie("RefreshToken", RefreshToken, {
+        res.clearCookie("RefreshToken", RefreshToken, {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "none" : "strict",
@@ -184,7 +183,7 @@ export const RefreshToken = async (req,res) => {
         const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
         
         const isProd = process.env.NODE_ENV
-        
+
         res.cookie("AccessToken", AccessToken, {
           httpOnly: true,
           secure: isProd,
