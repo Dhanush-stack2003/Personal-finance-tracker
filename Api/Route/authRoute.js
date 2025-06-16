@@ -1,5 +1,5 @@
 import Express from 'express'
-import { SignIn, SignOut, SignUp, EmailVerification, verifyOtp, resetOtp, verifyResetOtp, RefreshToken, googleAuth, isAccountVerified, resetPassword } from '../Controller/AuthController.js'
+import { SignIn, SignOut, SignUp, EmailVerification, verifyOtp, resetOtp, verifyResetOtp, RefreshToken, googleAuth, resetPassword } from '../Controller/AuthController.js'
 import userAuth from '../Config/userAuth.js'
 
 const AuthRouter = Express.Router()
@@ -24,6 +24,5 @@ AuthRouter.post('/refresh-token',RefreshToken)
 
 AuthRouter.post('/google-auth',googleAuth)
 
-AuthRouter.get('/isVerified',userAuth,isAccountVerified)
 
 export default AuthRouter
