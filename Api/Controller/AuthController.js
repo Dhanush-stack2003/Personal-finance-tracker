@@ -188,7 +188,7 @@ export const RefreshToken = async (req,res) => {
         
         const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
         
-        const isProd = process.env.NODE_ENV
+        const isProd = process.env.NODE_ENV === 'production'
 
         res.cookie("AccessToken", AccessToken, {
           httpOnly: true,
