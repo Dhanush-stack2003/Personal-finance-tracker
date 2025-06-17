@@ -57,7 +57,7 @@
     color: #FFFFFF;
     position: absolute;
     top: 100%;
-    left:-10%;
+    left:-50%;
     padding:10px 20px;
     width: 150px;
     list-style: none;
@@ -109,7 +109,7 @@
         background-color: #34B476;
         position: absolute;
         top: 100%;
-        left:-100%;
+        left:-110%;
         padding:10px 20px;
         width: 130px;
         list-style: none;

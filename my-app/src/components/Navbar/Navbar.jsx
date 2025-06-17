@@ -34,7 +34,7 @@ const location = useLocation()
           Finance tracker
         </h1></a>
       </div>
-      {!location.pathname === '/' && <div className="menubar">
+     <div className="menubar">
         <ul>
           <li className='home_btn'>
               <a href='/dashboard'>Home</a>
@@ -42,7 +42,6 @@ const location = useLocation()
          <li className="img">
             <img
               src={currentUser?.photoURL}
-              alt="log."
             />
             <div className="account_manage">
               <ul>
@@ -55,7 +54,7 @@ const location = useLocation()
             </div>
           </li>
         </ul>
-      </div>}
+      </div>
     </div>
   );
 }
