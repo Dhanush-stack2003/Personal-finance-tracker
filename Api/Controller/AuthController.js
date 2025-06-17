@@ -61,14 +61,14 @@ export const SignIn = async(req,res) => {
      res.cookie('AccessToken',AccessToken,{
         httpOnly:true,
         secure:isProd,
-        sameSite:isProd ? 'none' : 'strict',
+        sameSite:isProd ? 'None' : 'Strict',
         maxAge: 15 * 60 * 1000
      })
 
      res.cookie('RefreshToken',RefreshToken,{
         httpOnly:true,
         secure:isProd,
-        sameSite:isProd ? 'none' :'strict',
+        sameSite:isProd ? 'None' :'Strict',
         maxAge:7* 24 * 60 * 60 * 1000
      })
 
@@ -94,14 +94,14 @@ export const googleAuth = async (req,res) => {
             res.cookie("AccessToken", AccessToken, {
               httpOnly: true,
               secure: isProd,
-              sameSite: isProd ? "none" : "strict",
+              sameSite: isProd ? "None" : "Strict",
               maxAge: 15 * 60 * 1000,
             });
 
             res.cookie("RefreshToken", RefreshToken, {
               httpOnly: true,
               secure: isProd,
-              sameSite: isProd ? "none" : "strict",
+              sameSite: isProd ? "None" : "Strict",
               maxAge: 7 * 24 * 60 * 60 * 1000,
             });
 
@@ -133,14 +133,14 @@ export const googleAuth = async (req,res) => {
              res.cookie("AccessToken", AccessToken, {
                httpOnly: true,
                secure: isProd,
-               sameSite: isProd ? "none" : "strict",
+               sameSite: isProd ? "None" : "Strict",
                maxAge: 15 * 60 * 1000,
              });
 
              res.cookie("RefreshToken", RefreshToken, {
                httpOnly: true,
                secure: isProd,
-               sameSite: isProd ? "none" : "strict",
+               sameSite: isProd ? "None" : "Strict",
                maxAge: 7 * 24 * 60 * 60 * 1000,
              });
 
@@ -155,19 +155,19 @@ export const googleAuth = async (req,res) => {
 
 export const SignOut = (req,res) => {
     try {
-        const isProd = process.env.NODE_ENV
+        const isProd = process.env.NODE_ENV === 'production'
         
         res.clearCookie("AccessToken", AccessToken, {
           httpOnly: true,
           secure: isProd,
-          sameSite: isProd ? "none" : "strict",
+          sameSite: isProd ? "None" : "Strict",
           maxAge: 15 * 60 * 1000,
         });
 
         res.clearCookie("RefreshToken", RefreshToken, {
           httpOnly: true,
           secure: isProd,
-          sameSite: isProd ? "none" : "strict",
+          sameSite: isProd ? "None" : "Strict",
           maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -186,18 +186,18 @@ export const RefreshToken = async (req,res) => {
     try {
         const decoded = jwt.verify(RefreshToken,process.env.REFRESH_TOKEN_KEY);
         
-        const newToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
+        const AccessToken =  jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
         
         const isProd = process.env.NODE_ENV === 'production'
 
         res.cookie("AccessToken", AccessToken, {
           httpOnly: true,
           secure: isProd,
-          sameSite: isProd ? "none" : "strict",
+          sameSite: isProd ? "None" : "Strict",
           maxAge: 15 * 60 * 1000,
         });
         
-        return res.status(200).json({RefreshedAccessToken:newToken})
+        return res.status(200).json({success:true,message:"new token added"})
     } catch (error) {
         return res.status(500).json({success:false,message:"Invalid Token"})
 
