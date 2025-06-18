@@ -277,7 +277,7 @@ h2{
     }
 
     .hero p {
-        font-size: 22px;
+        font-size: 20px;
         padding: 10px;
         margin: 0 auto;
     }
@@ -287,18 +287,12 @@ h2{
     }
 
     .cta_button {
-
         margin:40px 50px;
     }
 
     .hero_img img{
         width: 350px;
         height: 350px;
-    }
-
-    .hero p{
-         font-size: 20px;
-         text-align: left;
     }
 
     .features{
@@ -370,6 +364,91 @@ h2{
         margin: 0%;
     }
     
+}
+
+@media (min-width:768px) and (max-width:1023px) {
+
+    .hero{
+        margin:10px 0px;
+        padding: 5px;
+        display: flex;
+        height: 80rem;
+        flex-direction: column-reverse;
+    }
+
+    .hero p {
+        max-width: 700px;
+        font-size: 23px;
+        padding: 10px;
+    }
+
+    .hero h3 {
+        font-size: 50px;
+    }
+
+    .cta_button {
+        margin:20px 0px;
+    }
+
+
+   .features{
+        margin-bottom: 0px;
+    }
+
+    .features .feature-grid{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+   .feature-card {
+     height: 450px;
+     width: 300px;
+    }
+    
+  .feature-card p{
+    font-size: 20px;
+    padding-bottom: 15px;
+    color:#044928;
+   }
+
+   .feature-card:nth-child(2) p {
+    margin-bottom: 20px;
+   }
+
+   .feature-card img {
+    width: 180px;
+    height: 180px
+}
+
+.how-it-works {
+    margin: 10px 0px;
+}
+
+
+.how-it-works h2 {
+    margin-bottom: 50px;
+}
+  
+.how-it-works .steps{
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.how-it-works .step img {
+    height: 180px;
+    width: 180px;
+}
+
+.how-it-works .step h3 {
+    width: 100%;
+}    
 }
 
 .swiper {
