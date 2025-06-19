@@ -25,3 +25,19 @@
         width: 100%;
     }
 }
+
+@media (min-width:601px) and (max-width:1023px) {
+
+    .get_transaction_right_side .title {
+        margin: 20px 0px;
+        text-align: center;
+    }
+    
+    .get_transaction_right_side {
+        width: auto;
+    }
+
+    .all_transaction {
+        width: 100%;
+    }
+}

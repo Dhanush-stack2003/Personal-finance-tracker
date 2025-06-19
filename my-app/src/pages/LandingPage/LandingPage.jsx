@@ -58,7 +58,7 @@ function Home() {
             <div className="feature-card">
               <img src={graph} alt="" className="icons" />
               <h3>Visual Insights</h3>
-              <p>pie chart and graph for spending trends</p>
+              <p> pie chart and graph for spending trends</p>
               <button>MORE</button>
             </div>
             <div className="feature-card">
@@ -75,7 +75,7 @@ function Home() {
           <h2>How it works</h2>
           <div className="steps">
             <div className="step">
-              <h3>1.Sign up</h3>
+              <h3>1.Sign up </h3>
               <p>Create a free account</p>
               <img src={Signup} alt="sign up" className="icons" />
             </div>

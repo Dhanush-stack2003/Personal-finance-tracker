@@ -11,7 +11,6 @@ function Navbar() {
 const {currentUser} = useSelector((state)=>state.user)
 const dispatch = useDispatch();
 const navigate = useNavigate();
-const location = useLocation()
 
   const logoutHandler = async () => {
     try {
@@ -20,6 +19,7 @@ const location = useLocation()
       if(data.success){
         dispatch(SignOutSuccess())
         navigate('/sign-in')
+        toast.success(data.message)
       }
     } catch (error) {
       dispatch(SignOutFailure())

@@ -9,7 +9,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     max-width: 1500px;
 }
 
@@ -185,6 +184,16 @@ form{
 
      .addtransaction .button_container button {
         padding: 15px 35px;
+    }
+}
+
+@media (min-width:601px) and (max-width:1023px) {
+    
+    .add_transaction_left_side {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 30px 50px;
     }
 }
 

@@ -39,3 +39,13 @@
     }
     
 }
+
+@media (min-width:601px) and (max-width:1023px) {
+    .recent_transaction {
+        display: flex;
+        height: 530px;
+        width: 360px;
+        margin: 0 auto;
+    }
+
+}

@@ -171,3 +171,53 @@
         margin: 0 auto;
     }
 }
+
+
+@media (min-width:601px) and (max-width:1023px) {
+    
+    .get_transaction_left_side {
+        border-right: none;
+        width: 95%;
+        height: auto;
+    }
+
+    .get_transaction_left_side .title {
+        text-align: center;
+    }
+
+    .choose_payment_method_container,
+    .choose_category_container,
+    .choose_payment_type_container,
+    .choose_filter_date_container,
+    .choose_amount_container {
+        margin-left:20% ;
+        justify-content: start;
+    }
+
+    .choose_payment_method.section,
+    .choose_payment_type.section,
+    .choose_category.section,
+    .choose_filter_date.section,
+    .choose_filter_amount.section {
+        width: 90%;
+    }
+
+    .choose_payment_method.section span,
+    .choose_payment_type.section span ,
+    .choose_category.section span,
+    .choose_filter_date.section span,
+    .choose_filter_amount.section span {
+        margin-left: 20%;
+    }
+
+    .get_transaction_left_side .find_transaction{
+        background-color: #0000ff;
+        padding: 15px 25px;
+        font-size: 20px;
+        width: 60%;
+        margin: 0 auto;
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+}

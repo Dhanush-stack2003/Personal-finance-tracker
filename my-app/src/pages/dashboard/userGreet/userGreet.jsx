@@ -68,7 +68,7 @@ function UserGreet() {
     return (
       <section className="usergreet">
         <div className="usergreet_left">
-          <h3>Hello Dhanush!</h3>
+          <h3>Hello {currentUser.username}!</h3>
           <p>Track your finance and spend wisely</p>
           <Link to='/add-transaction' style={{textDecoration:'none'}}><span>+Add Transaction</span></Link>
         </div>

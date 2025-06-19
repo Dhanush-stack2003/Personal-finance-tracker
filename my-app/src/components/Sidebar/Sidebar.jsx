@@ -9,7 +9,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import user_icon from '../../Asserts/default_profile_icon.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import Api from '../../pages/privateProfile/Api'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify'
 import { SignOutStart,SignOutFailure,SignOutSuccess} from '../../store/userSlice/userSlice'
 
@@ -49,48 +49,56 @@ function Sidebar() {
 
       <div className="sidebar_container">
         <ul>
+            <Link to='/dashboard' style={{textDecoration:'none'}}>
           <li>
-            <a href="/dashboard" className="sidebar_label">
+            <p className="sidebar_label">
               <MdOutlineDashboard />
-            </a>
-            <a href="/dashboard" className="sidebar_link">
+            </p>
+            <p className="sidebar_link">
               Dashboard
-            </a>
+            </p>
           </li>
+            </Link>
+            <Link to='/add-transaction' style={{textDecoration:'none'}}>
           <li>
-            <a href="/add-transaction" className="sidebar_label">
-              <MdFormatListBulletedAdd />
-            </a>
-            <a href="/add-transaction" className="sidebar_link">
-              Add Transaction
-            </a>
+              <p className="sidebar_label">
+                <MdFormatListBulletedAdd />
+              </p>
+              <p className="sidebar_link">
+                Add Transaction
+              </p>
           </li>
+            </Link>
+            <Link to='/get-transaction' style={{textDecoration:'none'}}>
           <li>
-            <a href="/get-transaction" className="sidebar_label">
-              <FaSearch />
-            </a>
-            <a href="/get-transaction" className="sidebar_link">
-              Find Transaction
-            </a>
+              <p className="sidebar_label">
+                <FaSearch />
+              </p>
+              <p className="sidebar_link">
+                Find Transaction
+              </p>
           </li>
-            <div className="arrow_icon" onClick={toggleSidebar}>
-              <FaArrowLeft className={`icon ${collapsed ? "rotated" : ""}`} />
-            </div>
+            </Link>
+          <div className="arrow_icon" onClick={toggleSidebar}>
+            <FaArrowLeft className={`icon ${collapsed ? "rotated" : ""}`} />
+          </div>
+            <Link to='/contact' style={{textDecoration:'none'}}>
           <li>
-            <a href="/contact" className="sidebar_label">
+            <p className="sidebar_label">
               <GrContact />
-            </a>
-            <a href="/contact" className="sidebar_link">
+            </p>
+            <p className="sidebar_link">
               Contact us
-            </a>
+            </p>
           </li>
+            </Link>
           <li>
-            <a href="/logout" className="sidebar_label">
+            <p className="sidebar_label">
               <MdLogout />
-            </a>
-            <a onClick={logoutHandler} className="sidebar_link">
+            </p>
+            <p onClick={logoutHandler} className="sidebar_link">
               Logout
-            </a>
+            </p>
           </li>
         </ul>
       </div>
