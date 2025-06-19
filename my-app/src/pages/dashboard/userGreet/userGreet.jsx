@@ -20,11 +20,13 @@ function UserGreet() {
   useEffect(()=>{
     
     const totalAmount = async() => {
+      const toastId = toast.info('fetching transaction, please wait...',{autoClose:false,closeButton:true})
       const { data } = await Api.get(`/transaction/totalAmount/${currentUser._id}`)
       if(!data){
         toast.error(data.message)
         return
       }
+      toast.dismiss(toastId)
       const { totalExpense,totalIncome } = data.message
       setAmounts({expense:totalExpense,income:totalIncome})
     }
