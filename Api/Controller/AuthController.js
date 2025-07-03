@@ -157,14 +157,14 @@ export const SignOut = (req,res) => {
     try {
         const isProd = process.env.NODE_ENV === 'production'
         
-        res.clearCookie("AccessToken", AccessToken, {
+        res.clearCookie("AccessToken", {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "None" : "Strict",
           maxAge: 15 * 60 * 1000,
         });
 
-        res.clearCookie("RefreshToken", RefreshToken, {
+        res.clearCookie("RefreshToken", {
           httpOnly: true,
           secure: isProd,
           sameSite: isProd ? "None" : "Strict",
